@@ -11,6 +11,13 @@ import org.springframework.context.annotation.Configuration;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * 
+ * created by basquiat
+ * 
+ * simple jean-michel basquiat step
+ *
+ */
 @Slf4j
 @RequiredArgsConstructor
 @Configuration
