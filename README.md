@@ -40,30 +40,42 @@ spring:
 ```
 
 하지만 이렇게 했더니 에러가 난다.
-찾아 보니  spring.datasource 커넥션 풀 정보를 알려주면 Spring Boot가 자동 인식해서 데이타소스를 생성해준다고 한다. 그런데 이럴 경우에는 2개의 데이타소스를 생성할 경우 확장할 수 없기 때문에 위 설정을 다음과 같이 하면 된다고 한다.
+
+찾아보니 이유는 mysql의 버전때문이다. 버전을 낮추면 될 문제지만 최신 버전을 사용한다면 그것에 맞춰서 수정을 해줘야 하니 삽질이 시작됨
+
+일단 timezone 문제라는 것을 구글신을 통해서 찾게 되었다.
+
+그중에 간단한 방식은 다음과 같이 수정하는 것이다.
 
 ```
 spring:
   profiles: mysql
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+      hibernate.hbm2ddl.import_files_sql_extractor: org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor
+      hibernate.default_batch_fetch_size: ${chunkSize:1000}
+    open-in-view: false
   datasource:
-    basquiat:
-      jdbc-url: jdbc:mysql://127.0.0.1:3306/basquiat?autoReconnect=true
+    hikari:
+      jdbc-url: jdbc:mysql://localhost:3306/basquiat?useUnicode=yes&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
       username: basquiat
       password: basquiat
       driver-class-name: com.mysql.cj.jdbc.Driver
 
 ```
-hikari 대신에 사용할 데이터베이스 명인 basquiat로 세팅하면 된다.
+jdbc-url에 설정한 값에 옵션을 추가해서 serverTimezone=Asia/Seoul을 붙여서 실행하면 에러없이 잘 된다. 물론 UTC를 붙여서 해도 문제 없이 돈다.
 
-신기한 것은 pom.xml에 h2관련 dependency를 제거하면 실행이 되지 않는다.
-이유를 아직 찾지 못함.
+하지만 여기는 한국이니깐... KST는 에러가 나고 저렇게 지역을 명시해야 에러없이 작동한다.
 
-또한 mysql버전을 타기 때문이라는데 현재 이 프로젝트를 작성할 때 깐 mysql버전은 SELECT VERSION();날려봤더니 8.0.15이다.
+문제는 이것은 임시방편이 아닌가 싶다.
 
-그래서 시간도 남아서 버전을 5.6대로 낮춰서 해봤더니 저렇게 하지 않고 처음 방식으로 해도 잘 된다.
+왜냐하면 시스템간의 시간과 세션의 시간이 다르다고 한다. 
 
-일단은 최신 버전으로 다시 깔아서 저런 방식으로 설정해서 사용한다는 것을 기록해 둔다.
-
+일단은 모르겠다. 저렇게 하면 문제없이 돌아가고 select now()를 날렸을 때 시간도 한국 시간이니깐 그대로....
 
 ## scheme
 
