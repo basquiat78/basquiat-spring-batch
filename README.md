@@ -139,7 +139,7 @@ basquiatJob만 실행된 것을 확인할 수 있다.
 
 ## 원하는 Job에 JobParameter 주입하기
 
-이미지를 올릴 수 없으니...노가도로 Job, Step, Tasklet를 xml형식으로 표현을 해보겠습니다.
+이미지를 올릴 수 없으니...귀찮지만 Job, Step, Tasklet를 xml형식으로 표현을 해보겠습니다.
 
 예를 들면 Job이 하나 있고 이름이 basquiatJob이고 Step이 존재하겠죠?
 
