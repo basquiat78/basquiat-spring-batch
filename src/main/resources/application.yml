@@ -1,4 +1,7 @@
 spring:
+  batch:
+    job:
+      names: ${job.name:NONE}
   profiles:
     active: mysql
 
