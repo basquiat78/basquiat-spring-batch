@@ -292,6 +292,7 @@ Jean-Michel Basquiat의 이름을 따서 다음과 같이 xml형식으로 표현
     }
     
     @Bean
+    @JobScope
     public Step michelStep(@Value("#{jobParameters[favoriteMusician]}") String favoriteMusician) {
 		return stepBuilderFactory.get("michelStep")
 				                 .tasklet((contribution, chunkContext) -> 
@@ -304,6 +305,7 @@ Jean-Michel Basquiat의 이름을 따서 다음과 같이 xml형식으로 표현
     }
     
     @Bean
+    @JobScope
     public Step basquiatStep(@Value("#{jobParameters[favoriteMusician]}") String favoriteMusician) {
 		return stepBuilderFactory.get("basquiatStep")
                 				 .tasklet((contribution, chunkContext) -> 
