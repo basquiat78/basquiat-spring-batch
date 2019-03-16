@@ -430,5 +430,6 @@ log
 
 이거 없애는 방법이 뭔지를 모르겠다. forum, stackoverflow를 아무리 찾아봐도 방법이 없다...
 
+Log의 ANSI와 관련이 있다고 하는데 아무래도 기본으로 붙어서 날아가는 듯하다.
 
 Next Level : Tasklet
