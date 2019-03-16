@@ -159,16 +159,6 @@ Run Configuration에서 arguments탭에 다음과 같이 job name을 주고 실�
 저 명령어를 입력하고 실행하면
 
 ```
-
-<<<<<<< HEAD
-하지만 이렇게 했더니 에러가 난다.
-
-찾아보니 이유는 mysql의 버전때문이다. 버전을 낮추면 될 문제지만 최신 버전을 사용한다면 그것에 맞춰서 수정을 해줘야 하니 삽질이 시작됨
-
-일단 timezone 문제라는 것을 구글신을 통해서 찾게 되었다.
-
-그중에 간단한 방식은 다음과 같이 수정하는 것이다.
-=======
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
 ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
@@ -297,12 +287,8 @@ spring:
 따라서 Batch를 실행시에 JobParameter를 주입할 때 각 Step에 @JobScope 어노테이션을 붙여서 사용하며 예제 코드는 다음과 같이 코딩한다.
 
 예상: step의 tasklet은 step의 영역이나 tasklet관련 메소드에는 @StepScope가 붙지 않을까??
->>>>>>> refs/heads/step_3
 
 ```
-<<<<<<< HEAD
-jdbc-url에 설정한 값에 옵션을 추가해서 serverTimezone=Asia/Seoul을 붙여서 실행하면 에러없이 잘 된다. 물론 UTC를 붙여서 해도 문제 없이 돈다.
-=======
 	@Bean
 	public Job basquiatJob() {
 	return jobBuilderFactory.get("basquiatJob")
@@ -311,12 +297,8 @@ jdbc-url에 설정한 값에 옵션을 추가해서 serverTimezone=Asia/Seoul을
 	            			.next(basquiatStep(null))
 	            			.build();
 	}
->>>>>>> refs/heads/step_3
 
-<<<<<<< HEAD
-하지만 여기는 한국이니깐... KST는 에러가 나고 저렇게 지역을 명시해야 에러없이 작동한다.
-=======
-@Bean
+	@Bean
 	@JobScope
 	public Step jeanStep(@Value("#{jobParameters[favoriteMusician]}") String favoriteMusician) {
 		return stepBuilderFactory.get("jeanStep")
@@ -328,11 +310,7 @@ jdbc-url에 설정한 값에 옵션을 추가해서 serverTimezone=Asia/Seoul을
 				                  			})
 				                  .build();
     }
->>>>>>> refs/heads/step_3
-
-<<<<<<< HEAD
-문제는 이것은 임시방편이 아닌가 싶다.
-=======
+    
     @Bean
     public Step michelStep(@Value("#{jobParameters[favoriteMusician]}") String favoriteMusician) {
 		return stepBuilderFactory.get("michelStep")
@@ -344,11 +322,6 @@ jdbc-url에 설정한 값에 옵션을 추가해서 serverTimezone=Asia/Seoul을
 				                		   })
 				                 .build();
     }
->>>>>>> refs/heads/step_3
-
-<<<<<<< HEAD
-왜냐하면 시스템간의 시간과 세션의 시간이 다르다고 한다. 
-=======
     
     @Bean
     public Step basquiatStep(@Value("#{jobParameters[favoriteMusician]}") String favoriteMusician) {
@@ -361,16 +334,10 @@ jdbc-url에 설정한 값에 옵션을 추가해서 serverTimezone=Asia/Seoul을
 				                		   })
                 				 .build();
     }
->>>>>>> refs/heads/step_3
-
-<<<<<<< HEAD
-일단은 모르겠다. 저렇게 하면 문제없이 돌아가고 select now()를 날렸을 때 시간도 한국 시간이니깐 그대로....
-=======
 ```
 
 basquiatJob내부에 flow에 파라미터가 null인 이유는 runtime시에 lazy 또눈  late data binding방식으로 주입이 되기 때문이다.
 
->>>>>>> refs/heads/step_3
 
 다음과 같이 실행을 해보자
 
