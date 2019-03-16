@@ -165,6 +165,8 @@ Jean-Michel Basquiat의 이름을 따서 다음과 같이 xml형식으로 표현
 이런 xml형식을 본다면 step의 scope영역은 Job의 영역이라고 볼 수 있다.
 따라서 Batch를 실행시에 JobParameter를 주입할 때 각 Step에 @JobScope 어노테이션을 붙여서 사용하며 예제 코드는 다음과 같이 코딩한다.
 
+예상: step의 tasklet은 step의 영역이나 tasklet관련 메소드에는 @StepScope가 붙지 않을까??
+
 ```
 	@Bean
 	public Job basquiatJob() {
@@ -214,6 +216,9 @@ Jean-Michel Basquiat의 이름을 따서 다음과 같이 xml형식으로 표현
     }
 
 ```
+
+basquiatJob내부에 flow에 파라미터가 null인 이유는 runtime시에 lazy 또눈  late data binding방식으로 주입이 되기 때문이다.
+
 
 다음과 같이 실행을 해보자
 
@@ -308,7 +313,6 @@ log
 2019-03-16 15:29:45 - HikariPool-1 - Shutdown completed.
 ```
 
-lazy 방식으로 runtime시 해당 값을 주입하는 방식인듯...
 
 ## At A Glance
 
