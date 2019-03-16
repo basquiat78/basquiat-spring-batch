@@ -1,20 +1,29 @@
 # basquiat-spring-batch
 
-## Project Enviroments
+[About Spring Batch Introduction](https://docs.spring.io/spring-batch/4.1.x/reference/html/index-single.html)
 
-1. Window10, STS, Spring Boot 2.1.3, mySql 8.0.15, Spring Batch 4.1.1
+### Project Enviroments
+
+OS: Window10    
+IDE: STS    
+Framework: Spring Boot 2.1.3    
+Module: Spring Batch 4.1.1    
+DB: mySql 8.0.15    
 
 버전은 이번에 하나씩 작업하면서 느끼는 건데 버전이 중요한거 같다.
 
 특히 mySql의 경우에는 버전에 따라서 application.yml에 설정하는 방법이 살짝 변경되는 부분도 있고 Spring Batch의 경우에는 추가된 부분들이 좀 있기 때문이다.
 
-[About Spring Batch Introduction](https://docs.spring.io/spring-batch/4.1.x/reference/html/index-single.html)
+이것은 Step별로 브랜치를 생성해서 튜토리얼을 작성한 프로젝트이다.
 
+각 단계별로 브랜치를 확인하면서 진행하면 된다.
 
 
 ## Step 1
 
 스프링 배치를 사용하기 전에 내장 디비인 h2를 이용해서 간단하게 job과 step를 만들어서 실행해 본다.
+
+언제나 "Hello World"를 찎는 걸로 시작하니깐 간단하게 형식적인 job과 step를 작성해서 로그를 찍으면 시작할 준비가 된것이 아니겠는가?
 
 
 ## Step2
