@@ -240,33 +240,13 @@ basquiatJob만 실행된 것을 확인할 수 있다.
 
 ## 원하는 Job에 JobParameter 주입하기
 
-이미지를 올릴 수 없으니...귀찮지만 Job, Step, Tasklet를 xml형식으로 표현을 해보겠습니다.
+이미지를 올릴 수 없으니...귀찮지만 Job, Step, Tasklet를 xml형식으로 표현을 해보겠다.
 
-예를 들면 Job이 하나 있고 이름이 basquiatJob이고 Step이 존재하겠죠?
+예를 들면 Job이 하나 있고 이름이 basquiatJob이고 Step이 존재할 것이다.?
 
-Jean-Michel Basquiat의 이름을 따서 다음과 같이 xml형식으로 표현할 수 있겠습니다.
->>>>>>> refs/heads/step_3
+Jean-Michel Basquiat의 이름을 따서 다음과 같이 xml형식으로 표현할 수 있겠다.
 
 ```
-<<<<<<< HEAD
-spring:
-  profiles: mysql
-  jpa:
-    hibernate:
-      ddl-auto: none
-    show-sql: false
-    properties:
-      hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-      hibernate.hbm2ddl.import_files_sql_extractor: org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor
-      hibernate.default_batch_fetch_size: ${chunkSize:1000}
-    open-in-view: false
-  datasource:
-    hikari:
-      jdbc-url: jdbc:mysql://localhost:3306/basquiat?useUnicode=yes&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
-      username: basquiat
-      password: basquiat
-      driver-class-name: com.mysql.cj.jdbc.Driver
-=======
 <Job name="basquiatJob">
 	<Step name="jeanStep">
 		<Tasklet name="1">
