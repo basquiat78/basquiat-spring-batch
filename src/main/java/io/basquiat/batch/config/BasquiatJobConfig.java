@@ -3,8 +3,10 @@ package io.basquiat.batch.config;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
+import org.springframework.batch.core.configuration.annotation.JobScope;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.repeat.RepeatStatus;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -52,9 +54,9 @@ public class BasquiatJobConfig {
 	@Bean
 	public Job basquiatJob() {
 	return jobBuilderFactory.get("basquiatJob")
-	            			.start(jeanStep())
-	            			.next(michelStep())
-	            			.next(basquiatStep())
+	            			.start(jeanStep(null))
+	            			.next(michelStep(null))
+	            			.next(basquiatStep(null))
 	            			.build();
 	}
 
@@ -74,22 +76,26 @@ public class BasquiatJobConfig {
 	 * @return Step
 	 */
 	@Bean
-	public Step jeanStep() {
+	@JobScope
+	public Step jeanStep(@Value("#{jobParameters[favoriteMusician]}") String favoriteMusician) {
 		return stepBuilderFactory.get("jeanStep")
 				                  .tasklet((contribution, chunkContext) -> 
 				                  			{
 							                    log.info(">>>>> This is Jean");
+							                    log.info("Jean-Michel Basquiat Loves {}", favoriteMusician);
 							                    return RepeatStatus.FINISHED;
 				                  			})
 				                  .build();
     }
 
     @Bean
-    public Step michelStep() {
+    @JobScope
+    public Step michelStep(@Value("#{jobParameters[favoriteMusician]}") String favoriteMusician) {
 		return stepBuilderFactory.get("michelStep")
 				                 .tasklet((contribution, chunkContext) -> 
 				                		   {
 				                			   log.info(">>>>> This is Michel");
+				                			   log.info("Jean-Michel Basquiat Loves {}", favoriteMusician);
 							                   return RepeatStatus.FINISHED;
 				                		   })
 				                 .build();
@@ -97,11 +103,13 @@ public class BasquiatJobConfig {
 
     
     @Bean
-    public Step basquiatStep() {
+    @JobScope
+    public Step basquiatStep(@Value("#{jobParameters[favoriteMusician]}") String favoriteMusician) {
 		return stepBuilderFactory.get("basquiatStep")
                 				 .tasklet((contribution, chunkContext) -> 
 				                		   {
 				                			   log.info(">>>>> This is Jean-Michel Basquiat");
+				                			   log.info("Jean-Michel Basquiat Loves {}", favoriteMusician);
 				                			   return RepeatStatus.FINISHED;
 				                		   })
                 				 .build();
