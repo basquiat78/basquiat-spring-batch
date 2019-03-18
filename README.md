@@ -139,11 +139,11 @@ basquiatJob만 실행된 것을 확인할 수 있다.
 
 ## 원하는 Job에 JobParameter 주입하기
 
-이미지를 올릴 수 없으니...귀찮지만 Job, Step, Tasklet를 xml형식으로 표현을 해보겠습니다.
+이미지를 올릴 수 없으니...귀찮지만 Job, Step, Tasklet를 xml형식으로 표현을 해보겠다.
 
-예를 들면 Job이 하나 있고 이름이 basquiatJob이고 Step이 존재하겠죠?
+예를 들면 Job이 하나 있고 이름이 basquiatJob이고 Step이 존재할 것이다.?
 
-Jean-Michel Basquiat의 이름을 따서 다음과 같이 xml형식으로 표현할 수 있겠습니다.
+Jean-Michel Basquiat의 이름을 따서 다음과 같이 xml형식으로 표현할 수 있겠다.
 
 ```
 <Job name="basquiatJob">
@@ -177,7 +177,7 @@ Jean-Michel Basquiat의 이름을 따서 다음과 같이 xml형식으로 표현
 	            			.build();
 	}
 
-@Bean
+	@Bean
 	@JobScope
 	public Step jeanStep(@Value("#{jobParameters[favoriteMusician]}") String favoriteMusician) {
 		return stepBuilderFactory.get("jeanStep")
@@ -191,6 +191,7 @@ Jean-Michel Basquiat의 이름을 따서 다음과 같이 xml형식으로 표현
     }
 
     @Bean
+    @JobScope
     public Step michelStep(@Value("#{jobParameters[favoriteMusician]}") String favoriteMusician) {
 		return stepBuilderFactory.get("michelStep")
 				                 .tasklet((contribution, chunkContext) -> 
@@ -204,6 +205,7 @@ Jean-Michel Basquiat의 이름을 따서 다음과 같이 xml형식으로 표현
 
     
     @Bean
+    @JobScope
     public Step basquiatStep(@Value("#{jobParameters[favoriteMusician]}") String favoriteMusician) {
 		return stepBuilderFactory.get("basquiatStep")
                 				 .tasklet((contribution, chunkContext) -> 
